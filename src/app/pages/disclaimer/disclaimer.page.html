@@ -1,0 +1,50 @@
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-title>Términos y condiciones</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-col size="12" style="text-align: center;" class="ion-text-center">
+            <ion-icon ios="ios-paper" md="ios-paper" color="primary" style="font-size: 40px"></ion-icon>
+            <ion-title text-capitalize>Términos y condiciones</ion-title>
+        </ion-col>
+    </ion-row>
+
+
+
+
+    <ion-row>
+        <ion-col size="12">
+            <ion-card>
+                <ion-card-title></ion-card-title>
+                <ion-card-content style="text-align: justify;" class="ion-text-justify">
+
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit officia, dolore magni aliquam quo dolorem maxime fugiat, perferendis nulla veritatis cum quidem pariatur libero obcaecati provident ex, ab nemo totam? Lorem, ipsum dolor sit amet consectetur
+                    adipisicing elit. Quibusdam non pariatur quod quidem voluptatibus doloremque! Obcaecati itaque quae id rem a blanditiis tempora quibusdam, vitae reprehenderit sed, minima maxime et! Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Eum illum eveniet ipsa esse earum in tempora repellat officiis, et minus dolor corrupti, error molestiae. Perferendis ducimus saepe nemo vitae neque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus aperiam
+                    sapiente laudantium aut est officiis fuga perspiciatis cum in consequatur, dignissimos illo sequi, et rem quod quis illum libero tempore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, suscipit nemo veniam nobis
+                    dolore quo impedit quasi eaque omnis rerum temporibus magnam dicta dolorum corporis perferendis iure reiciendis consequatur tempore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati officiis voluptatum modi aut sequi
+                    totam quasi fuga quidem, neque iste libero architecto explicabo reprehenderit quisquam a labore blanditiis aspernatur nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores maiores repellendus eligendi aut perspiciatis
+                    sint porro, incidunt ullam? Rerum voluptatem sequi ea id vero possimus! Officiis nisi sapiente dolor sed.
+
+
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+        <ion-col>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Acepto los términos y condiciones</ion-label>
+                    <ion-checkbox slot="start" [checked]="aceptado" (click)="aceptado = !aceptado"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+
+        </ion-col>
+        <ion-col size="12" style="text-align: center;">
+            <ion-button [disabled]="aceptado">CONTINUAR</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>
