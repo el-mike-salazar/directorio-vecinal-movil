@@ -1,1 +1,38 @@
+.poster {
+    width: 170px !important;
+    height: 180px !important;
+}
 
+.textoPoster {
+    top: 90%;
+    left: 67%;
+    transform: translate(-50%, -50%);
+}
+
+.tituloOficio {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.final {
+    top: 90%;
+    left: 77%;
+    transform: translate(-50%, -50%);
+}
+
+.sc-ion-card-md-h {
+    margin-left: unset;
+    margin-right: unset;
+    // top: -10;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 2px;
+}
+
+.hydrated {
+    padding: 0;
+}

@@ -1,14 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <h3>Clasificaciones</h3>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngFor="let cat of arrCategoria" expand="full">
+        <ion-col>
+            <ion-row size="6">
+                <ion-card class="contenedor">
+                    <img class="opacidad" src="/assets/lob.jpg">
+                    <ion-label class="texto-encima centrado titulo">{{cat.strNombre}}</ion-label>
+                    <ion-chip style="width: 150px;" class="texto-encima final" color="danger">
+                        <ion-label style=" margin: auto;"> 150 Profesionales</ion-label>
+                    </ion-chip>
+                </ion-card>
+
+            </ion-row>
+            <ion-row size="6">
+                <ion-slides [options]="slideOpts">
+                    <ion-slide *ngFor="let a of [1,1,1]">
+                        <ion-card (click)="funcionp()">
+                            <ion-label class="texto-encima tituloOficio">{{"Osdfwwsfsdffisdjfdddfsdfsfsdskjhcio" | slice: 0: 17}}</ion-label>
+                            <!--17 letras para hacer el slice-->
+                            <img class="poster" src="/assets/lob.jpg">
+                            <ion-chip class="texto-encima textoPoster" color="danger">
+                                <ion-icon name="contact"></ion-icon>
+                                <ion-label style=" margin: auto;">1500</ion-label>
+                            </ion-chip>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-row>
+        </ion-col>
+    </ion-grid>
+
 </ion-content>
