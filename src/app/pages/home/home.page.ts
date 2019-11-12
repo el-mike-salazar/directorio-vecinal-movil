@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  funcionp() {
-    console.log('holi');
+  fnListU(idOficio) {
+    console.log(idOficio);
   }
 }
