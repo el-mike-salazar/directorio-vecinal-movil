@@ -1,13 +1,8 @@
-div[scrollx=true],
-div[scrolly=true] {
+.scroll {
+    overflow-y: auto;
     position: relative;
     overflow: hidden;
-}
-
-div[scrollx=true] {
-    overflow-x: auto;
-}
-
-div[scrolly=true] {
-    overflow-y: auto;
+     ::-webkit-scrollbar {
+        display: none;
+    }
 }
