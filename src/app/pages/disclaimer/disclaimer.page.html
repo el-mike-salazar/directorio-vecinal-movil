@@ -1,0 +1,42 @@
+<ion-content>
+    <ion-row style="margin-top: 20px;">
+        <ion-col size="12" style="text-align: center;" class="ion-text-center">
+            <ion-icon ios="ios-paper" md="ios-paper" color="primary" style="font-size: 40px"></ion-icon>
+            <ion-title text-capitalize>Términos y condiciones</ion-title>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col size="12" style="text-align: center;">
+            <ion-card>
+                <ion-card-content style="text-align: justify; height: 460px; overflow-y: scroll" class="ion-text-justify">
+                    <p>
+                        El Centro Crecer correspondiente que se encuentran en esta ciudad de Aguascalientes, Aguascalientes es el responsable del tratamiento de los Datos Personales que nos proporcione, los cuales serán protegidos conforme a lo dispuesto por la Ley General de
+                        Protección de Datos Personales en Posesión de Sujetos Obligados, así como por la Ley de Protección de Datos Personales en Posesión de los Sujetos Obligados del Estado de Aguascalientes y sus Municipios, y demás normatividad que
+                        resulte aplicable.
+                        <br><br><span style="font-weight: bold;">Trasferencia de datos personales:</span> Se informa que no se realizarán transferencias de datos personales, salvo aquéllas que sean necesarias para atender requerimientos de información
+                        de una autoridad competente, que estén debidamente fundados y motivados.
+                        <br><br><span style="font-weight: bold;">Mecanismos y medios disponibles para que el titular, en su caso, pueda manifestar su negativa al tratamiento sus datos personales:</span> Usted podrá manifestar su negativa al tratamiento
+                        de sus datos personales directamente ante la Unidad de Transparencia del centro crecer correspondiente que se encuentra en esta ciudad de Aguascalientes, Aguascalientes.
+
+                        <br><br> <span style="font-weight: bold;">Fundamento Legal:</span> De conformidad con lo dispuesto en el Capítulo III del Título Primero y Título Cuarto de la Ley de Protección de Datos Personales en Posesión de los Sujetos Obligados
+                        del Estado de Aguascalientes y sus Municipios, se establece el procedimiento para presentar solicitudes para el ejercicio de los derechos de acceso, rectificación, cancelación u oposición al tratamiento de los datos personales;
+                        y del trámite al recurso de revisión. Asimismo, en los artículos 124 y 144 de la Ley General de Transparencia y Acceso a la Información Pública, en relación con los artículos 71 y 75 de la Ley de Transparencia y Acceso a la Información
+                        Pública del Estado de Aguascalientes y sus Municipios, que establecen el procedimiento de acceso a la información y del trámite de recurso de revisión, es que se recaban los datos personales.
+
+                        <br><br>Si usted no manifiesta su oposición o negativa para el uso y/o tratamiento de su información personal, acepte los términos y condiciones para poder utilizar la aplicación.
+
+                    </p>
+                </ion-card-content>
+            </ion-card>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Acepto los términos y condiciones</ion-label>
+                    <ion-checkbox slot="start" (click)="aceptado = !aceptado"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+            <ion-button [disabled]="!aceptado">CONTINUAR</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

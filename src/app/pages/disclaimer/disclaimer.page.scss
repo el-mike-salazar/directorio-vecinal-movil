@@ -1,0 +1,8 @@
+.scroll {
+    overflow-y: auto;
+    position: relative;
+    overflow: hidden;
+     ::-webkit-scrollbar {
+        display: none;
+    }
+}
