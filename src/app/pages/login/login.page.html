@@ -15,7 +15,7 @@
                                     <ion-col>
                                         <ion-item class="i-item">
                                             <ion-icon name="mail"></ion-icon>&nbsp;
-                                            <ion-input class="i-input" name="strCorreo" [(ngModel)]="loginModel.strCorreo" required #strCorreo="ngModel" type="email" placeholder="Correo Electrónico"></ion-input>
+                                            <ion-input pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" name="strEmail" [(ngModel)]="loginModel.strEmail" required #strEmail="ngModel" type="email" placeholder="Correo Electrónico"></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
@@ -23,7 +23,7 @@
                                     <ion-col>
                                         <ion-item class="i-item">
                                             <ion-icon name="lock"></ion-icon>&nbsp;
-                                            <ion-input class="i-input" name="strContrasena" [(ngModel)]="loginModel.strContrasena" required #strContrasena="ngModel" type="password" placeholder="Contraseña"></ion-input>
+                                            <ion-input minlength="8" name="strPassword" [(ngModel)]="loginModel.strPassword" required #strPassword="ngModel" type="password" placeholder="Contraseña"></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
@@ -32,17 +32,20 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-button class="i-button" expand="block" fill="outline" [disabled]="fLogin.invalid" type="submit">Iniciar Sesión</ion-button>
+                            <ion-button expand="block" fill="outline" [disabled]="fLogin.invalid" type="submit">
+                                <ion-icon name="log-in"></ion-icon>&nbsp;Iniciar Sesión</ion-button>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col class="top-20">
-                            <ion-button fill="clear" size="small" (click)="mostrarRecuperarContrasena()" color="dark">Recuperar Contraseña</ion-button>
+                            <ion-button fill="clear" size="small" (click)="mostrarRecuperarContrasena()" color="dark">
+                                <ion-icon name="mail-unread"></ion-icon>&nbsp;Recuperar Contraseña</ion-button>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-button fill="clear" size="small" (click)="mostrarLogin()">Registrarte</ion-button>
+                            <ion-button fill="clear" size="small" (click)="mostrarLogin()">
+                                <ion-icon name="person-add"></ion-icon>&nbsp;Registrarte</ion-button>
                         </ion-col>
                     </ion-row>
                 </form>
@@ -53,24 +56,19 @@
                 <ion-row>
                     <ion-col>
                         <ion-buttons>
-                            <ion-back-button defaultHref="/" (click)="mostrarRegistro()"></ion-back-button>
+                            <ion-back-button defaultHref="/login" (click)="mostrarRegistro()"></ion-back-button>
                         </ion-buttons>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <img src="/assets/img/arbolito_3.png" style="height: 5em; width: 5em;">
-                    </ion-col>
-                </ion-row>
-                <form (ngSubmit)="registro(fRegistro)" #fRegistro="ngForm">
+                <form (ngSubmit)="registro()" #fRegistro="ngForm" enctype="multipart/form-data">
                     <ion-row>
                         <ion-col>
                             <ion-list class="i-list">
                                 <ion-row>
                                     <ion-col>
                                         <ion-item class="i-item">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <ion-input autocomplete="on" class="i-input" name="strNombre" [(ngModel)]="personaModel.strNombre" required #strNombre="ngModel" type="text" placeholder="Nombre(s)"></ion-input>
+                                            <ion-icon name="person-add"></ion-icon>&nbsp;
+                                            <ion-input minlength="1" autocomplete="on" name="strNombre" [(ngModel)]="personaModel.strNombre" required #strNombre="ngModel" type="text" placeholder="Nombre(s)"></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
@@ -78,7 +76,7 @@
                                     <ion-col>
                                         <ion-item class="i-item">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <ion-input autocomplete="on" class="i-input" name="strPrimerApellido" [(ngModel)]="personaModel.strPrimerApellido" required #strPrimerApellido="ngModel" type="text" placeholder="Apellido Paterno"></ion-input>
+                                            <ion-input minlength="2" autocomplete="on" name="strPrimerApellido" [(ngModel)]="personaModel.strPrimerApellido" required #strPrimerApellido="ngModel" type="text" placeholder="Apellido Paterno"></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
@@ -86,7 +84,39 @@
                                     <ion-col>
                                         <ion-item class="i-item">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <ion-input autocomplete="on" class="i-input" name="strSegundoApellido" [(ngModel)]="personaModel.strSegundoApellido" required #strSegundoApellido="ngModel" type="text" placeholder="Apellido Materno"></ion-input>
+                                            <ion-input autocomplete="on" name="strSegundoApellido" [(ngModel)]="personaModel.strSegundoApellido" #strSegundoApellido="ngModel" type="text" placeholder="Apellido Materno"></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-item class="i-item">
+                                            <ion-icon name="home"></ion-icon>&nbsp;
+                                            <ion-input minlength="3" name="strCalle" [(ngModel)]="personaModel.strCalle" #strCalle="ngModel" type="text" placeholder="Dirección" required></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-item class="i-item">
+                                            <ion-icon name="business"></ion-icon>&nbsp;
+                                            <ion-input minlength="2" name="strColonia" [(ngModel)]="personaModel.strColonia" #strColonia="ngModel" type="text" placeholder="Colinia" required></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-item class="i-item">
+                                            <ion-icon name="pin"></ion-icon>&nbsp;
+                                            <ion-input minlength="5" name="numCodigoPostal" [(ngModel)]="personaModel.numCodigoPostal" #numCodigoPostal="ngModel" type="text" placeholder="C.P." required></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-item class="i-item">
+                                            <ion-icon name="call"></ion-icon>&nbsp;
+                                            <ion-input minlength="10" name="strTelefono" [(ngModel)]="personaModel.strTelefono" #strTelefono="ngModel" type="text" placeholder="Teléfono" required></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
@@ -94,29 +124,31 @@
                                     <ion-col>
                                         <ion-item class="i-item">
                                             <ion-icon name="mail"></ion-icon>&nbsp;
-                                            <ion-input class="i-input" name="strCorreo" [(ngModel)]="personaModel.strCorreo" required #strCorreo="ngModel" type="email" placeholder="Correo Electrónico"></ion-input>
+                                            <ion-input pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" name="strEmail" [(ngModel)]="personaModel.strCorreo" required #strEmail="ngModel" type="email" placeholder="Correo Electrónico"></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
                                     <ion-col>
                                         <ion-item class="i-item">
-                                            <ion-icon name="key"></ion-icon>&nbsp;
-                                            <ion-input class="i-input" name="strContrasena" [(ngModel)]="personaModel.strContrasena" required #strContrasena="ngModel" type="password" placeholder="Contraseña"></ion-input>
+                                            <ion-icon name="lock"></ion-icon>&nbsp;
+                                            <ion-input minlength="8" name="strPassword" [(ngModel)]="personaModel.strPassword" required #strPassword="ngModel" type="password" placeholder="Contraseña" required></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
                                     <ion-col>
-                                        <ion-item class="i-item">
-                                            <ion-icon name="key"></ion-icon>&nbsp;
-                                            <ion-input class="i-input" name="strContrasenaConf" required type="password" placeholder="Repetir Contraseña"></ion-input>
+                                        <ion-item mode="ios" class="i-item">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <ion-input name="strPasswordConf" [(ngModel)]="personaModel.strPasswordConf" #strPasswordConf="ngModel" type="password" placeholder="Repetir Contraseña" required></ion-input>
                                         </ion-item>
+                                        <ion-label class="error-mensaje" *ngIf="personaModel.strPassword !== personaModel.strPasswordConf">Las contraseñas no coinciden, favor de verificarlas</ion-label>
                                     </ion-col>
                                 </ion-row>
                             </ion-list>
                             <ion-col>
-                                <ion-button class="i-button" expand="block" fill="outline" [disabled]="fRegistro.invalid" type="submit">Crear usuario</ion-button>
+                                <ion-button expand="block" fill="outline" [disabled]="fRegistro.invalid" type="submit">
+                                    <ion-icon name="person-add"></ion-icon>&nbsp;&nbsp;Crear usuario</ion-button>
                             </ion-col>
                         </ion-col>
                     </ion-row>
@@ -128,7 +160,7 @@
                 <ion-row>
                     <ion-col>
                         <ion-buttons>
-                            <ion-back-button defaultHref="/" (click)="mostrarRegistro()"></ion-back-button>
+                            <ion-back-button defaultHref="/login" (click)="mostrarRegistro()"></ion-back-button>
                         </ion-buttons>
                     </ion-col>
                 </ion-row>
@@ -145,13 +177,14 @@
                                     <ion-col>
                                         <ion-item class="i-item">
                                             <ion-icon name="mail"></ion-icon>&nbsp;
-                                            <ion-input class="i-input" name="strCorreo" [(ngModel)]="personaModel.strCorreo" required #strCorreo="ngModel" type="email" placeholder="Correo Electrónico"></ion-input>
+                                            <ion-input pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" name="strEmail" [(ngModel)]="personaModel.strCorreo" required #strEmail="ngModel" type="email" placeholder="Correo Electrónico"></ion-input>
                                         </ion-item>
                                     </ion-col>
                                 </ion-row>
                             </ion-list>
                             <ion-col>
-                                <ion-button class="i-button" expand="block" fill="outline" [disabled]="fRecuperarContrasena.invalid" type="submit">Recuperar Contraseña</ion-button>
+                                <ion-button expand="block" fill="outline" [disabled]="fRecuperarContrasena.invalid" type="submit">
+                                    <ion-icon name="mail-unread"></ion-icon>&nbsp;Recuperar Contraseña</ion-button>
                             </ion-col>
                         </ion-col>
                     </ion-row>

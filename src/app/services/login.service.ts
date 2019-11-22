@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  url = `http://localhost:3000/api`;
-  token: string = null;
+  url = `http://172.16.40.5:3000/api`;
 
-  constructor( private http: HttpClient, private storage: Storage) { }
+  constructor( private http: HttpClient) { }
 
-  login(strCorreo: string, strPassword: string) {
+  login(strEmail: string, strPassword: string) {
 
-    const data = {strCorreo, strPassword };
+    const data = {strEmail, strPassword };
 
     return this.http.post(`${this.url}/persona/login`, data).toPromise();
-
   }
+
+  registro( persona ) {
+    return this.http.post(`${this.url}/persona/registrar`, persona).toPromise();
+  }
+
 }

@@ -1,5 +1,5 @@
-ion-icon {
-    font-size: 25px;
+.i-item ion-icon {
+    color: rgb(53, 52, 52);
 }
 
 .top-20 {
@@ -7,7 +7,8 @@ ion-icon {
 }
 
 .background-image {
-    --background: linear-gradient(rgb(255, 255, 255, 1.0), rgba(255, 255, 255, 0.8)), url('/assets/img/1.1.jpg');
+    --background-repeat: repeat-y;
+    --background: linear-gradient(rgb(255, 255, 255, 1.0), rgba(255, 255, 255, 0.8)), url('/assets/img/1.1.1.jpg');
 }
 
 .i-list {
@@ -18,11 +19,13 @@ ion-icon {
     --background: rgba(255, 255, 255, 0.0);
 }
 
-.i-input {
-    --placeholder-color: #000000;
-    --placeholder-opacity: 0.7;
+.error-mensaje {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #FF0039;
 }
 
-.i-button {
-    background-color: #ffffff;
+.item-interactive.ion-valid {
+    --highlight-background: #3880ff;
 }
