@@ -6,9 +6,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServiciosService {
 
+  url = 'http://172.16.40.4:3000/api';
+
   constructor(private http: HttpClient) { }
 
   getCategorias() {
-    return this.http.get('http://localhost:3000/api/categoria/obtener');
+    return this.http.get(`${ this.url }/categoria/obtener`);
+  }
+
+  
+  obtenerOficios( idCat: string ) {
+    return this.http.get(`${ this.url }/oficio/obtener/${idCat}`).toPromise();
+  }
+
+  obtenerCards(idOficio: string){
+    return this.http.get(`${ this.url }/centro-crecer/obtenerCards/${ idOficio }`).toPromise();
   }
 }
