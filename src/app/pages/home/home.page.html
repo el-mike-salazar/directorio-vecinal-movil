@@ -21,7 +21,7 @@
             <ion-row size="6">
                 <ion-slides [options]="slideOpts">
                     <ion-slide *ngFor="let ofic of cat.aJsnOficios">
-                        <ion-card (click)="fnListU(ofic._id)" [routerLink]="['/oficios',ofic._id ]">
+                        <ion-card (click)="fnListU(ofic._id)" [routerLink]="['/oficios',cat._id, ofic._id ]">
                             <ion-label class="texto-encima tituloOficio">{{ofic.strNombre | slice: 0: 17}}</ion-label>
                             <!--17 letras para hacer el slice-->
                             <img class="poster" src="http://172.16.40.4:3000/api/imagen/obtener/imgOfi/{{ofic.strImagen}}">

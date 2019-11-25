@@ -51,11 +51,12 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.servicio.getCategorias().subscribe(resp => {
       this.arrCategoria = resp['cont'].categorias;
-      console.log(this.arrCategoria);
+     // console.log(this.arrCategoria);
     });
   }
 
   fnListU(idOficio) {
-    console.log(idOficio);
+    //console.log(idOficio);
+
   }
 }

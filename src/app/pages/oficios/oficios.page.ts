@@ -1,9 +1,9 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Observable } from 'rxjs';
 import { ServiciosService } from 'src/app/services/servicios.service';
+import { OficiosModel } from '../../models/oficiosModel';
 
 @Component({
   selector: 'app-oficios',
@@ -13,15 +13,74 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 export class OficiosPage implements OnInit {
 
   idOficio: string;
+  idCategoria: string;
   cardsTienda: CardTienda[];
-
-  constructor(private activeRouter: ActivatedRoute, public alertController: AlertController, private geolocation: Geolocation, private servicio: ServiciosService) { }
+  oficios: OficiosModel[];
+  oficio: OficiosModel;
+  image: any;
   marcador = {
     strNombre: 'Punto Actual',
     fltLatitud: 0,
     fltLongitud: 0,
     nmbDistancia: 0
   };
+  cargado = false;
+
+  // tslint:disable-next-line: max-line-length
+  constructor(private activeRouter: ActivatedRoute, private router: Router, private alertController: AlertController, private geolocation: Geolocation, private servicio: ServiciosService, ) { }
+
+  async ngOnInit() {
+
+    this.idOficio = this.activeRouter.snapshot.params.idOfi;
+    this.idCategoria = this.activeRouter.snapshot.params.idCat;
+
+    await this.servicio.obtenerOficios(this.idCategoria).then( (oficio: any) => {
+      this.oficios = oficio.cont.oficios;
+
+      this.oficios.forEach( (ofi: OficiosModel) => {
+        if (ofi._id === this.idOficio) {
+          this.oficio = ofi;
+          this.image = this.oficio.strImagen;
+        }
+      });
+    }).catch( (err: any) => {
+      console.log(err);
+    });
+
+    this.obtenerCards();
+  }
+
+  async obtenerCards() {
+    await this.servicio.obtenerCards(this.oficio._id).then( async (cards: any) => {
+      this.cardsTienda = cards.cont.cardTienda;
+
+      console.log(cards.cont.cardTienda);
+
+      await this.geolocation.getCurrentPosition().then( async(resp) => {
+
+        this.marcador.fltLatitud =  resp.coords.latitude;
+        this.marcador.fltLongitud = resp.coords.longitude;
+
+        await this.cardsTienda.forEach( (cardTienda: CardTienda) => {
+          this.calcularDistancia(cardTienda, this.marcador);
+          this.cardsTienda.sort((a: CardTienda, b: CardTienda) => a.nmbDistancia - b.nmbDistancia);
+        });
+
+       }).catch((error) => {
+         console.log('Error getting location', error);
+       });
+    }).catch( async(err) => {
+      this.router.navigate(['/home']);
+      const alert = await this.alertController.create({
+        header: 'Error ' + err.error.resp,
+        subHeader: '',
+        message: err.error.mensaje,
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    });
+  }
 
   async presentAlert(idTienda: string) {
     const alert = await this.alertController.create({
@@ -48,158 +107,8 @@ export class OficiosPage implements OnInit {
      }).catch((error) => {
        console.log('Error getting location', error);
      });
-  }
 
-  async ngOnInit() {
-
-    this.idOficio = this.activeRouter.snapshot.params.id;
-    this.cardsTienda = [{
-      idCentroC: '5dc08cd7ecd98f64fca8d386',
-      strNombreCC: 'Centro Crecer Paquita',
-      fltLongitud: -102.3094807,
-      fltLatitud: 21.851056,
-      tiendas: [{
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Paquita-1-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Paquita Uno',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      },{
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Paquita-2-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Paquita Dos',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      },
-      {
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Paquita-3-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Paquita Tres',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      }]
-    },
-    {
-      idCentroC: '5dbb11e70748a94044c330db',
-      strNombreCC: 'Centro Crecer Pirules',
-      fltLongitud: -102.3202225,
-      fltLatitud: 21.8676625,
-      tiendas: [{
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Pirul-1-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Pirules Uno',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      }]
-    },
-    {
-      idCentroC: '5dbb08c38a24481ffce11212',
-      strNombreCC: 'Centro Crecer Miravalle',
-      fltLongitud: -102.311141,
-      fltLatitud: 21.891286,
-      tiendas: [{
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Mirava-1-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Miravalle Uno',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      },
-      {
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Mirava-2-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Miravalle Dos',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      }]
-    },
-    {
-      idCentroC: '5dc08cd7ecd98f64fca8d386',
-      strNombreCC: 'Centro Crecer Insurgentes',
-      fltLongitud: -102.3543212,
-      fltLatitud: 21.8424556,
-      tiendas: [{
-        idOficio: '5dd435737776091d44fdb584',
-        idTienda: 'Insurg-1-5dd6b5db45bdeb2b8cef1344',
-        strNombreT: 'Tienda Insurgentes Uno',
-        strDesc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, dignissimos sit! Quo repellat suscipit laudantium praesentium eos culpa beatae quod quasi nesciunt omnis ex libero, velit optio est odio qui?',
-        ajsnCarrusel: [
-          { strImagen: '6w35s4k3674ptt.jpg' }
-        ],
-        prestador: {
-          idPrestador: '',
-          strNombre: 'Luis Eduardo Castañeda Delgadillo'
-        }
-      }]
-    }];
-
-    this.servicio.getCategorias().toPromise().then( async (cat: any) => {
-      const alert = await this.alertController.create({
-        header: 'Alert',
-        subHeader: 'Subtitle',
-        message: cat.msg,
-        buttons: ['OK']
-      });
-
-      await alert.present();
-    }).catch( async (err: any) => {
-      const alert = await this.alertController.create({
-        header: 'Alert',
-        subHeader: err.msg,
-        message: err.cont,
-        buttons: ['OK']
-      });
-
-      await alert.present();
-    });
-
-    await this.geolocation.getCurrentPosition().then(async (resp) => {
-      this.marcador.fltLatitud =  resp.coords.latitude;
-      this.marcador.fltLongitud = resp.coords.longitude;
-      await this.cardsTienda.forEach( (cardTienda: CardTienda) => {
-        this.calcularDistancia(cardTienda, this.marcador);
-        this.cardsTienda.sort((a: CardTienda, b: CardTienda) => a.nmbDistancia - b.nmbDistancia);
-      });
-
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
-
+    this.obtenerCards();
   }
 
   calcularDistancia(p1: CardTienda, p2: Marcador) {
@@ -218,9 +127,10 @@ export class OficiosPage implements OnInit {
   }
 
 }
+
 interface CardTienda {
   idCentroC: string;
-  strNombreCC: string;
+  strNombreC: string;
   fltLongitud: number;
   fltLatitud: number;
   tiendas: Tienda[];
@@ -232,11 +142,7 @@ interface Tienda {
   idTienda: string;
   strNombreT: string;
   strDesc: string;
-  ajsnCarrusel: [
-    {
-      strImagen: string
-    }
-  ];
+  aJsnCarrusel: any;
   prestador: {
     idPrestador: string;
     strNombre: string;
