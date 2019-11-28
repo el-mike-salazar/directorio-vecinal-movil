@@ -14,7 +14,7 @@ export class PersonaModel {
   strCorreo: string;
   strPassword: string;
   strPasswordConf: string;
-  arrRol: string = 'werg334trefd45ygtfvd';
+  arrRol: string;
   strTelefono: string;
-  nombreImg: string= '/noImage.png';
+  nombreImg: string = '/noImage.png';
 }

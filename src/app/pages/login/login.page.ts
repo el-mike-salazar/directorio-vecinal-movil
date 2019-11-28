@@ -6,6 +6,7 @@ import { PersonaModel } from '../../models/login-model/login.model';
 import { LoginService } from '../../services/login.service';
 import { UiServiceService } from '../../services/ui-service.service';
 import { Storage } from '@ionic/storage';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -47,12 +48,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async guardarToken( token: string) {
-    this.token = token;
-    await this.storage.set('token', token);
-  }
-
-  registro() {
+  async registro() {
     if (this.personaModel.strPassword !== this.personaModel.strPasswordConf) {
       this.uiService.alertaInformativa('Las contraseñas no coinciden');
     } else {
@@ -70,14 +66,49 @@ export class LoginPage implements OnInit {
       regCliente.append('strTelefono', this.personaModel.strTelefono);
       regCliente.append('nombreImg', this.personaModel.nombreImg);
 
-      this.loginService.registro(regCliente).then( data => {
+      await this.loginService.registro(regCliente).then( data => {
         console.log(data);
+        // this.guardarToken(data.cont.token);
         this.navCtrl.navigateRoot( '/home', { animated: true } );
       }).catch( err => {
-        console.log(err);
+        // this.token = null;
+        // this.storage.clear();
         this.uiService.alertaInformativa(err.error.const.err);
       });
     }
+  }
+
+  async guardarToken( token: string) {
+    this.token = token;
+    await this.storage.set('token', token);
+  }
+
+  async cargarToken() {
+    this.token = await this.storage.get('token') || null;
+  }
+
+  async validaToken(): Promise<boolean> {
+
+    await this.cargarToken();
+
+    if (!this.token) {
+      this.navCtrl.navigateRoot( '/login', { animated: true } );
+      return Promise.reject(false);
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: this.token
+    });
+
+    await this.loginService.validaToken(headers).then( (resp: any) => {
+      this.personaModel = resp.cont.usuario;
+      this.guardarToken(resp.cont.token);
+    }).catch(err => {
+      this.navCtrl.navigateRoot( '/login', { animated: true } );
+      console.log(err);
+    });
+
+    return Promise.resolve(true);
   }
 
   recuperar(fRecuperarContrasena: NgForm) {

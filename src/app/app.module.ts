@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { LoginPage } from './pages/login/login.page';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { AppComponent } from './app.component';
     IonicStorageModule.forRoot(),
     ReactiveFormsModule],
   providers: [
+    LoginPage,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
