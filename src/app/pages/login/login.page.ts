@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('entre');
     this.slides.lockSwipes( true );
   }
 
