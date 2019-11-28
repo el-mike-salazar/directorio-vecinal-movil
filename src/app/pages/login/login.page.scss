@@ -1,0 +1,30 @@
+.i-item ion-icon {
+    color: rgb(53, 52, 52);
+}
+
+.top-20 {
+    margin-top: 20%;
+}
+
+.background-image {
+    --background: linear-gradient(rgb(255, 255, 255, 0.8), rgba(255, 255, 255, 1.0)), url('/assets/img/backgound.jpg');
+}
+
+.i-list {
+    background-color: transparent;
+}
+
+.i-item {
+    --background: rgba(255, 255, 255, 0.0);
+}
+
+.error-mensaje {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #FF0039;
+}
+
+.item-interactive.ion-valid {
+    --highlight-background: #3880ff;
+}
