@@ -1,39 +1,47 @@
-<ion-content>
-    <ion-grid>
+<app-menu></app-menu>
+
+<ion-header no-border>
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title style="font-size:20px; font-family: 'Segoeuil'">CATEGORÍAS</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content id="main">
+    <ion-grid *ngFor="let cat of arrCategoria" expand="full">
+        <!-- Categorias -->
         <ion-row>
-            <ion-col>
-                <h3>Clasificaciones</h3>
+            <ion-col size="12">
+                <ion-label class="titulo">
+                    {{cat.strNombre}}
+                </ion-label>
+                <img class="img-cat" src="http://172.16.40.19:3000/api/imagen/obtener/imgCat/{{cat.strImagen}}">
+                <ion-chip class="chip-cat">
+                    <ion-icon name="hammer"></ion-icon>
+                    <ion-label>0 Profesionales</ion-label>
+                </ion-chip>
             </ion-col>
         </ion-row>
-    </ion-grid>
-
-    <ion-grid *ngFor="let cat of arrCategoria" expand="full">
-        <ion-col>
-            <ion-row size="6">
-                <ion-card class="contenedor">
-                    <img class="opacidad" src="http://172.16.40.4:3000/api/imagen/obtener/imgCat/{{cat.strImagen}}">
-                    <ion-label class="texto-encima centrado titulo">{{cat.strNombre}}</ion-label>
-                    <ion-chip style="width: 150px;" class="texto-encima final" color="danger">
-                        <ion-label style=" margin: auto;"> 0 Profesionales</ion-label>
-                    </ion-chip>
-                </ion-card>
-            </ion-row>
-            <ion-row size="6">
-                <ion-slides [options]="slideOpts">
+        <!-- Oficios -->
+        <ion-row>
+            <ion-col size="12">
+                <ion-slides [options]="slideOpts" scrollbar="true">
                     <ion-slide *ngFor="let ofic of cat.aJsnOficios">
-                        <ion-card (click)="fnListU(ofic._id)" [routerLink]="['/oficios',cat._id, ofic._id ]">
-                            <ion-label class="texto-encima tituloOficio">{{ofic.strNombre | slice: 0: 17}}</ion-label>
-                            <!--17 letras para hacer el slice-->
-                            <img class="poster" src="http://172.16.40.4:3000/api/imagen/obtener/imgOfi/{{ofic.strImagen}}">
-                            <ion-chip class="texto-encima textoPoster" color="danger">
-                                <ion-icon name="contact"></ion-icon>
-                                <ion-label style=" margin: auto;">.0</ion-label>
+                        <ion-card [routerLink]="['/oficios',cat._id, ofic._id ]">
+
+                            <img class="img-oficio" src="http://172.16.40.19:3000/api/imagen/obtener/imgOfi/{{ofic.strImagen}}">
+                            <ion-label class="titulo-oficio" style="padding-top: 50%;">{{ofic.strNombre | slice: 0: 17}}</ion-label>
+
+                            <ion-chip class="chip-ofi">
+                                <ion-icon name="contact" color="white"></ion-icon>
+                                <ion-label>0</ion-label>
                             </ion-chip>
+
                         </ion-card>
                     </ion-slide>
                 </ion-slides>
-            </ion-row>
-        </ion-col>
+            </ion-col>
+        </ion-row>
     </ion-grid>
-
 </ion-content>

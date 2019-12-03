@@ -7,7 +7,9 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule), canLoad: [UsuarioGuard]},
   { path: 'disclaimer', loadChildren: './pages/disclaimer/disclaimer.module#DisclaimerPageModule', canLoad: [UsuarioGuard] },
   { path: 'oficios/:idCat/:idOfi', loadChildren: './pages/oficios/oficios.module#OficiosPageModule', canLoad: [UsuarioGuard] },
-  { path: 'login', loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)}
+  { path: 'login', loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)},
+  { path: 'actualizar-cliente', loadChildren: './pages/actualizar-cliente/actualizar-cliente.module#ActualizarClientePageModule' }
+
 ];
 
 @NgModule({

@@ -30,9 +30,9 @@ export class OficiosPage implements OnInit {
   constructor(private activeRouter: ActivatedRoute, private router: Router, private alertController: AlertController, private geolocation: Geolocation, private servicio: ServiciosService, ) { }
 
   async ngOnInit() {
-
     this.idOficio = this.activeRouter.snapshot.params.idOfi;
     this.idCategoria = this.activeRouter.snapshot.params.idCat;
+    console.log(this.idOficio, this.idCategoria);
 
     await this.servicio.obtenerOficios(this.idCategoria).then( (oficio: any) => {
       this.oficios = oficio.cont.oficios;
@@ -56,7 +56,7 @@ export class OficiosPage implements OnInit {
 
       console.log(cards.cont.cardTienda);
 
-      await this.geolocation.getCurrentPosition().then( async(resp) => {
+      await this.geolocation.getCurrentPosition().then( async (resp) => {
 
         this.marcador.fltLatitud =  resp.coords.latitude;
         this.marcador.fltLongitud = resp.coords.longitude;
@@ -70,7 +70,7 @@ export class OficiosPage implements OnInit {
          console.log('Error getting location', error);
        });
     }).catch( async(err) => {
-      this.router.navigate(['/home']);
+      //this.router.navigate(['/home']);
       const alert = await this.alertController.create({
         header: 'Error ' + err.error.resp,
         subHeader: '',

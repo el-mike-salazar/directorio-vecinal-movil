@@ -1,27 +1,48 @@
-.poster {
-    width: 170px !important;
-    height: 180px !important;
+.img-cat {
+    width: 100% !important;
+    max-height: 220px !important;
+    background-position: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 10px 20px 0 rgba(0, 0, 0, 0.30);
 }
 
-.textoPoster {
-    top: 90%;
-    left: 67%;
-    transform: translate(-50%, -50%);
-}
-
-.tituloOficio {
-    color: black;
-    font-size: 18px;
+.titulo {
+    font-family: 'Segoeuil';
+    padding: 10px 10px 100px 10px;
+    font-size: 20px;
+    color: white;
+    width: 98%;
+    height: 220px;
     position: absolute;
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.829) 0%, rgba(0, 0, 0, 0.11) 100%);
+}
+
+.chip-cat {
+    position: absolute;
+    color: white;
+    top: 10px;
+    right: 5px;
+    background: rgba(56, 128, 255, 0.7);
+}
+
+.titulo-oficio {
+    font-family: 'Segoeuil';
+    font-size: 14px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: white;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.11) 100%);
 }
 
-.final {
-    top: 90%;
-    left: 77%;
-    transform: translate(-50%, -50%);
+.img-oficio {
+    width: 150px !important;
+    height: 150px !important;
+    // background-position: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 10px 20px 0 rgb(0, 0, 0, 0.30);
+    // padding-bottom: 40px;
 }
 
 .sc-ion-card-md-h {
@@ -33,6 +54,18 @@
     margin-bottom: 2px;
 }
 
-.hydrated {
-    padding: 0;
+// .hydrated {
+//     // padding: 0.5;
+// }
+.chip-ofi {
+    position: absolute;
+    color: white;
+    top: 72%;
+    left: 30%;
+    background: rgba(56, 128, 255, 0.7);
+    // background: rgba(56, 58, 62, 0.7);
+}
+
+.tool {
+    background: rgba(56, 128, 255, 0.7);
 }
