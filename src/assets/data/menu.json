@@ -1,0 +1,16 @@
+[{
+        "icon": "briefcase",
+        "name": "Mis Negocios",
+        "redirectTo": "/mis-negocios"
+    },
+    {
+        "icon": "construct",
+        "name": "Servicios",
+        "redirectTo": "/servicios"
+    },
+    {
+        "icon": "information-circle-outline",
+        "name": "Info",
+        "redirectTo": "/about"
+    }
+]

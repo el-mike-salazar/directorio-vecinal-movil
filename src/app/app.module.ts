@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginPage } from './pages/login/login.page';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

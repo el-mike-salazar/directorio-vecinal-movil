@@ -54,9 +54,4 @@ export class HomePage implements OnInit {
      // console.log(this.arrCategoria);
     });
   }
-
-  fnListU(idOficio) {
-    //console.log(idOficio);
-
-  }
 }

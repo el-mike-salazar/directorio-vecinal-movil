@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServiciosService {
 
-  url = 'http://172.16.40.4:3000/api';
+  url = 'http://172.16.40.19:3000/api';
 
   constructor(private http: HttpClient) { }
 
@@ -14,12 +14,11 @@ export class ServiciosService {
     return this.http.get(`${ this.url }/categoria/obtener`);
   }
 
-  
   obtenerOficios( idCat: string ) {
     return this.http.get(`${ this.url }/oficio/obtener/${idCat}`).toPromise();
   }
 
-  obtenerCards(idOficio: string){
+  obtenerCards(idOficio: string) {
     return this.http.get(`${ this.url }/centro-crecer/obtenerCards/${ idOficio }`).toPromise();
   }
 }
